@@ -11,7 +11,7 @@ function sortArray(arr, order) {
         if ((order === 'ascending' && arr[j] > arr[j + 1]) ||
             (order === 'descending' && arr[j] < arr[j + 1])) {
           // Меняем элементы местами
-          [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+          arr[j], arr[j + 1] = arr[j + 1], arr[j];
         }
       }
     }
