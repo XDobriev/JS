@@ -1,43 +1,35 @@
 // Функция для шифрования пароля
 function encryptPassword(password) {
-    const chars = password.split('');
-    const n = chars.length;
-    const mid = Math.floor(n / 2);
+    const arr = password.split('');
+    const n = arr.length;
+    let left = 0;
+    let right = n - 1;
   
-    // Меняем местами символы по заданному алгоритму
-    const firstHalf = chars.slice(0, mid).reverse();
-    const secondHalf = chars.slice(mid).reverse();
-  
-    if (n % 2 !== 0) {
-      // Если количество символов нечетное, середину не меняем
-      secondHalf.push(chars[mid]);
+    while (left < right) {
+        [arr[left], arr[right]] = [arr[right], arr[left]];
+        left++;
+        right--;
     }
   
-    const encryptedChars = secondHalf.concat(firstHalf);
-    return encryptedChars.join('');
+    return arr.join('');
   }
-
   
-// Функция для проверки пароля
-function checkPassword(originalPassword, encryptedPassword) {
+  // Функция для проверки пароля деструктурирующего присваивания
+  function checkPassword(encryptedPassword, originalPassword) {
+    // Дешифруем пароль
     const decryptedPassword = encryptPassword(encryptedPassword);
-    return originalPassword === decryptedPassword;
+    
+    // Сравниваем дешифрованный пароль с исходным
+    return decryptedPassword === originalPassword;
   }
-
-// Пример использования
-  const originalPassword = 'mypassword';
+  
+  // Пример использования функций
+  const originalPassword = "password";
   const encryptedPassword = encryptPassword(originalPassword);
   console.log('Encrypted Password:', encryptedPassword);
   
-  const isPasswordCorrect = checkPassword(originalPassword, encryptedPassword);
-  console.log('Is Password Correct:', isPasswordCorrect); // true
-  
-  // Пример использования с результатом false
-  const wrongPassword = 'wrongpassword';
-  const isWrongPasswordCorrect = checkPassword(originalPassword, encryptPassword(wrongPassword));
-  console.log('Is Wrong Password Correct:', isWrongPasswordCorrect); // false
-  
-
+  const isPasswordCorrect = checkPassword(encryptedPassword, originalPassword);
+  console.log('Is Password Correct:', isPasswordCorrect);
   
 // тут я был вынужден был воспользоваться помощью CHATGPT - казалось бы, я обладаю всеми необходимыми знаниями для выполнения задания, однако никак не получалось скомпоновать их, чтобы решить домашку)
 // чат с этим помог
