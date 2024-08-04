@@ -6,7 +6,7 @@ function encryptPassword(password) {
     let right = n - 1;
   
     while (left < right) {
-        [arr[left], arr[right]] = [arr[right], arr[left]];
+        arr[left], arr[right] = arr[right], arr[left];
         left++;
         right--;
     }
