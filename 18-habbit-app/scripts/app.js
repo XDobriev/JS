@@ -11,7 +11,10 @@ const page = {
 		progressPercent: document.querySelector('.progress__percent'),
 		progressCoverBar: document.querySelector('.progress__cover-bar'),
 	},
-    body: 
+    content: {
+        daysContainer: document.getElementById('days'),
+        nextDay: document.querySelector('.habbit__day')
+    }
 }
 
 /* utils */
@@ -29,9 +32,6 @@ function saveData() {
 
 /* render */
 function rerenderMenu(activeHabbit) {
-	if (!activeHabbit) {
-		return;
-	}
 	for (const habbit of habbits) {
 		const existed = document.querySelector(`[menu-habbit-id="${habbit.id}"]`);
 		if (!existed) {
@@ -55,9 +55,6 @@ function rerenderMenu(activeHabbit) {
 }
 
 function rerenderHead(activeHabbit) {
-	if (!activeHabbit) {
-		return;
-	}
 	page.header.h1.innerText = activeHabbit.name;
 	const progress = activeHabbit.days.length / activeHabbit.target > 1
 		? 100
@@ -65,18 +62,28 @@ function rerenderHead(activeHabbit) {
 	page.header.progressPercent.innerText = progress.toFixed(0) + '%';
 	page.header.progressCoverBar.setAttribute('style', `width: ${progress}%`);
 }
-function rerenderBody(activeHabbit) {
-	if (!activeHabbit) {
-		return;
-	}
-	
+function rerenderContent(activeHabbit) {
+    page.content.daysContainer.innerHTML = '';
+    for (const index in activeHabbit.days) {
+        const element = document.createElement('div');
+        element.classList.add('habbit');
+        element.innerHTML = 
+        `<div class="habbit__day">День ${Number(index) + 1}</div>
+        <div class="habbit__comment">${activeHabbit.days[index].comment}</div>
+        <button class="habbit__delete"><img src="./images/delete.svg" alt="Удаление дня ${index + 1}"></button>`;
+        page.content.daysContainer.appendChild(element)
+    }
+    page.content.nextDay.innerText = `День ${activeHabbit.days.length + 1}`	
 }
 
 function rerender(activeHabbitId) {
 	const activeHabbit = habbits.find(habbit => habbit.id === activeHabbitId);
+    if (!activeHabbit) {
+		return;
+	}
 	rerenderMenu(activeHabbit);
 	rerenderHead(activeHabbit);
-	rerenderBody(activeHabbit);
+	rerenderContent(activeHabbit);
 }
 
 /* init */
