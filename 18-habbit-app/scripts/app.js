@@ -86,6 +86,15 @@ function rerender(activeHabbitId) {
 	rerenderContent(activeHabbit);
 }
 
+/* work with days */
+
+function addDays(event) {
+	event.preventDefault();
+	console.log(event);
+	const data = new FormData(event.target)
+	console.log(data.get('comment'));
+}
+
 /* init */
 (() => {
 	loadData();
