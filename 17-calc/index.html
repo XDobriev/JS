@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Калькулятор</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script src="./app.js"></script>
+    <div class="calculator">
+        <input type="text" id="number1" placeholder="Введите число 1">
+        <input type="text" id="number2" placeholder="Введите число 2">
+        <br>
+        <button onclick="calculate('add')">Сложить</button>
+        <button onclick="calculate('subtract')">Вычесть</button>
+        <button onclick="calculate('multiply')">Умножить</button>
+        <button onclick="calculate('divide')">Разделить</button>
+        <br>
+        <p>Результат: <span id="result"></span></p>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
